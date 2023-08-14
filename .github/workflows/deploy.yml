@@ -37,7 +37,7 @@ jobs:
           clientId: ${{ secrets.PORT_CLIENT_ID }}
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
           identifier: ${{ inputs.service }}-${{ inputs.environment }}-${{ env.SHA_SHORT }}
-          blueprint: deployment
+          blueprint: Product
           properties: |
             {
                "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
