@@ -38,11 +38,14 @@ jobs:
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
           identifier: ${{ inputs.service }}-${{ inputs.environment }}-${{ env.SHA_SHORT }}
           blueprint: product
-          properties: |
+          properties: |-
             {
-               "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-               "deployingUser": "${{ github.actor }}",
-               "imageTag": "latest",
-               "commitSha": "${{ env.SHA_SHORT }}"
+              "CNAME": "string",
+              "Product_Service_name": "string",
+              "type": "string"
+            }
+          relations: |-
+            {
+              "business_domain": "related_entity_identifier"
             }
           runId: "${{fromJson(inputs.port_payload).context.runId}}"
