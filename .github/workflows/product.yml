@@ -2,7 +2,7 @@ name: UPSERT workflow
 on:
   workflow_dispatch:
     inputs:
-      service:
+      product_name:
         type: string
       port_payload:
         required: true
@@ -10,13 +10,6 @@ on:
           general context (blueprint, run id, etc...)
         type: string
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - id: echo-deploy
-        run: echo "Hello here"
-
   create-entity-in-port-and-update-run:
     runs-on: ubuntu-latest
     steps:
@@ -50,12 +43,3 @@ jobs:
           operation: PATCH_RUN
           runId: ${{fromJson(inputs.port_payload).context.runId}}
           logMessage: An example of a log message
-      - name: Update action run status
-        uses: port-labs/port-github-action@v1
-        with:
-          clientId: ${{ secrets.CLIENT_ID }}
-          clientSecret: ${{ secrets.CLIENT_SECRET }}
-          operation: PATCH_RUN
-          runId: ${{fromJson(inputs.port_payload).context.runId}}
-          status: SUCCESS
-          logMessage: Workflow completed successfully
